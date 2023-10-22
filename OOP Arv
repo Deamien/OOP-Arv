@@ -1,0 +1,155 @@
+using System;
+
+// Basklassen Animal
+class Animal
+{
+    public string Species { get; set; }
+    public int Age { get; set; }
+    public double Weight { get; set; }
+    public string Color { get; set; }
+    public bool IsPredator { get; set; }
+
+    public Animal(string species, int age, double weight, string color, bool isPredator)
+    {
+        Species = species;
+        Age = age;
+        Weight = weight;
+        Color = color;
+        IsPredator = isPredator;
+    }
+
+    public void Eat()
+    {
+        Console.WriteLine("The animal is eating.");
+    }
+
+    public void Sleep()
+    {
+        Console.WriteLine("The animal is sleeping.");
+    }
+
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("The animal makes a sound.");
+    }
+}
+
+// Djur som ärver från Animal
+class Lion : Animal
+{
+    public int ManeLength { get; set; }
+
+    public Lion(string species, int age, double weight, string color, bool isPredator, int maneLength)
+        : base(species, age, weight, color, isPredator)
+    {
+        ManeLength = maneLength;
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine("The lion roars loudly.");
+    }
+}
+
+class Penguin : Animal
+{
+    public bool CanSwim { get; set; }
+
+    public Penguin(string species, int age, double weight, string color, bool isPredator, bool canSwim)
+        : base(species, age, weight, color, isPredator)
+    {
+        CanSwim = canSwim;
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine("The penguin makes a cute chirping sound.");
+    }
+}
+
+// Djur som ärver från Animal
+class Ape : Animal
+{
+    public int ArmLength { get; set; }
+
+    public Ape(string species, int age, double weight, string color, bool isPredator, int armLength)
+        : base(species, age, weight, color, isPredator)
+    {
+        ArmLength = armLength;
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine("The ape hoots and howls.");
+    }
+}
+
+// Två varianter av Penguins
+class EmperorPenguin : Penguin
+{
+    public EmperorPenguin(string species, int age, double weight, string color, bool isPredator)
+        : base(species, age, weight, color, isPredator, true)
+    {
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine("The Emperor Penguin makes a cute chirping sound.");
+    }
+
+    public void SlideOnIce()
+    {
+        Console.WriteLine("The emperor penguin slides on the ice.");
+    }
+}
+
+class LittleBluePenguin : Penguin
+{
+    public LittleBluePenguin(string species, int age, double weight, string color, bool isPredator)
+        : base(species, age, weight, color, isPredator, true)
+    {
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine("The Little Blue Penguin makes a cute chirping sound.");
+    }
+
+    public void SwimRapidly()
+    {
+        Console.WriteLine("The little blue penguin swims rapidly.");
+    }
+}
+
+class MainProgram
+{
+    static void Main(string[] args)
+    {
+        Lion lion = new Lion("African Lion", 6, 200, "Yellow", true, 15);
+        Penguin penguin = new Penguin("Emperor Penguin", 10, 40, "Black and White", false, true);
+        Ape ape = new Ape("Chimpanzee", 8, 150, "Brown", false, 2);
+        EmperorPenguin emperorPenguin = new EmperorPenguin("Emperor Penguin", 7, 35, "Black and White", false);
+        LittleBluePenguin littleBluePenguin = new LittleBluePenguin("Little Blue Penguin", 2, 2, "Blue", false);
+
+        lion.MakeSound();
+        penguin.MakeSound();
+        ape.MakeSound();
+        emperorPenguin.MakeSound();
+        littleBluePenguin.MakeSound();
+
+        emperorPenguin.SlideOnIce();
+        littleBluePenguin.SwimRapidly();
+
+        Console.Write("Vill du skapa ett nytt djur? (ja/nej): ");
+        string createNew = Console.ReadLine();
+
+        if (createNew == "ja")
+        {
+            Console.Write("Ange arten av det nya djuret: ");
+            string newSpecies = Console.ReadLine();
+            Console.Write("Ange ljudet av det nya djuret: ");
+            string newSound = Console.ReadLine();
+            Console.WriteLine(newSpecies + " " + "makes a" +" "+ newSound);
+        }
+    }
+}
